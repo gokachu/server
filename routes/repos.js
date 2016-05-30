@@ -17,7 +17,7 @@ router.get('/list/:page?', function(req, res, next) {
     var page = (!req.params.page) ? 0 : parseInt(req.params.page) - 1;
     var skip = page * page_limit;
     console.log(skip);
-    Repos.find({}).select('title').skip(skip).limit(page_limit).exec(function(err, repos) {
+    Repos.find({}).select('title git version author').skip(skip).limit(page_limit).exec(function(err, repos) {
         if (err) return next(err);
         res.json(repos);
     });

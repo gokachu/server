@@ -1,0 +1,35 @@
+#!/bin/node
+
+var mongoose = require("mongoose");
+
+mongoose.connect('mongodb://localhost/test');
+
+var ReposSchema = require('../models/ResposSchema');
+var Repos = mongoose.model('Repos', ReposSchema);
+function createRepo(i) {
+
+    var repo = new Repos({
+        title: "mock_" + i,
+        git: "test_mock_repo",
+        version: "v0.0." + i
+    });
+    repo.save(function(err) {
+        if (err) {
+          console.log(err);
+          process.exit(1);
+        }
+        console.log("done i:" + i);
+
+        if(i==9){
+          console.log("mocks created");
+          process.exit(0);
+        }
+        return;
+    });
+
+}
+
+console.log("creating mock");
+for (var i = 0; i < 10; i++) {
+    createRepo(i);
+}

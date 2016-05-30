@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var ReposSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     author: String,
     git: {

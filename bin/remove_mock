@@ -1,0 +1,17 @@
+#!/bin/node
+
+var mongoose = require("mongoose");
+
+mongoose.connect('mongodb://localhost/test');
+
+var ReposSchema = require('../models/ResposSchema');
+var Repos = mongoose.model('Repos', ReposSchema);
+
+Repos.find({git:"test_mock_repo"}).remove().exec(function(err){
+  if(err)return console.log(err);
+  console.log("done remove mocks");
+  console.log("done");
+  process.exit(0);
+});
+
+return;
